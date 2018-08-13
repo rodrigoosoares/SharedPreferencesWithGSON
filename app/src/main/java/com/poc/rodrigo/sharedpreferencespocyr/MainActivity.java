@@ -59,16 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void salvarPreferences() {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
-        /*
-        userSet =  new HashSet<>();
-        //Nome, classe, lvl, xp
-        userSet.add(etNome.getText().toString());
-        userSet.add(etClasse.getText().toString());                 METODO ANTIGO REMOVER DEPOIS
-        userSet.add(Integer.toString(1));
-        userSet.add(Integer.toString(0));
-        editor.putStringSet(KEY_WORD,userSet);
-        editor.apply();
-        */
+
         Gson gson = new Gson();
         Jogador jogador = new Jogador();
         jogador.nome = etNome.getText().toString();

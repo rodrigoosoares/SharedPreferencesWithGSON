@@ -2,11 +2,17 @@ package com.poc.rodrigo.sharedpreferencespocyr;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText etClasse;
     private TextView tvPrefs;
     private Button btnNome;
+    private ImageButton imageButton;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         etNome = findViewById(R.id.etNome);
         etClasse = findViewById(R.id.etClasse);
         tvPrefs =findViewById(R.id.tvPrefs);
+        imageButton = findViewById(R.id.ibImagem);
+        imageView = findViewById(R.id.img);
         mSharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
         btnSalvar.setOnClickListener(new View.OnClickListener() {
@@ -53,21 +63,26 @@ public class MainActivity extends AppCompatActivity {
                 Jogador jogador1 = gson.fromJson(json,Jogador.class);
                 Toast.makeText(MainActivity.this, jogador1.nome, Toast.LENGTH_SHORT).show();
                 Toast.makeText(MainActivity.this, Integer.toString(jogador1.nivel), Toast.LENGTH_SHORT).show();
+                //imageView.setImageBitmap(jogador1.imagem);
+                imageView.setImageBitmap((Bitmap) jogador1.imagem);
             }
         });
     }
 
     private void salvarPreferences() {
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-
+        /*SharedPreferences.Editor editor = mSharedPreferences.edit();
         Gson gson = new Gson();
         Jogador jogador = new Jogador();
         jogador.nome = etNome.getText().toString();
         jogador.classe = etClasse.getText().toString();
         jogador.nivel = 1;
         jogador.experiencia = 0;
+        jogador.imagem = imageButton.getDrawingCache(true);
+
         String jogadorString = gson.toJson(jogador);
         editor.putString(KEY_WORD,jogadorString);
         editor.apply();
+        Toast.makeText(MainActivity.this, "Salvo", Toast.LENGTH_SHORT).show();*/
+        imageView.setImageBitmap(imageButton.getDrawingCache());
     }
 }
